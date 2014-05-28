@@ -103,6 +103,8 @@ files_to_delete.each do |file|
   File.delete file
 end
 
+system("npm install")
+
 puts "Commiting to git..."
 system("git add -A")
 system("git commit -m 'Initialize project.'")
