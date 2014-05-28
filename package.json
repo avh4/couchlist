@@ -1,6 +1,7 @@
 {
   "scripts": {
     "build": "mkdir -p target && ./node_modules/.bin/webpack src/main/js/main.js target/bundle.js && cp src/main/{css,html}/* target/",
+    "dev": "webpack-dev-server",
     "test": "./node_modules/.bin/jasmine-node ./",
     "watch": "./node_modules/.bin/jasmine-node --autotest --color src"
   },
@@ -8,6 +9,7 @@
     "jsx-loader": "~0.10.0",
     "react": "~0.10.0",
     "webpack": "~1.0.0",
-    "jasmine-node": "^1.14.3"
+    "jasmine-node": "^1.14.3",
+    "webpack-dev-server": "^1.2.8"
   }
 }
