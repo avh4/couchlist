@@ -1,9 +1,3 @@
-# MyApp
+To use the archetype, 
 
-## Development
-
-```
-npm install
-npm run-script build
-open target/index.html
-```
+    bash <(curl http://archetypes.github.io/bootstrap.sh) archetypes/js-react
