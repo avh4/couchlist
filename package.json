@@ -13,6 +13,8 @@
     "webpack-dev-server": "^1.2.8",
     "gulp": "^3.6.2",
     "gulp-filter": "^0.4.1",
-    "gulp-jasmine": "^0.2.0"
+    "gulp-react": "^0.3.3",
+    "gulp-jasmine": "^0.2.0",
+    "jsdom": "^0.10.5"
   }
 }

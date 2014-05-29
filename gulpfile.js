@@ -1,29 +1,28 @@
 var gulp = require('gulp');
 var gulpFilter = require('gulp-filter');
+
+var react = require('gulp-react');
 var jasmine = require('gulp-jasmine');
 
 var paths = {
-    src: './src',
-    target: './target'
+  src: './src',
+  target: './target'
 };
 
-gulp.task('test', function () {
-    var testFilter = gulpFilter('test/js/**/*.js');
+gulp.task('test', function() {
+  var testFilter = gulpFilter('test/js/**/*.js');
 
-    gulp.src([paths.src + '/**/*.js'])
-        // copy into target
-        .pipe(gulp.dest(paths.target))
+  gulp.src([paths.src + '/**/*.js'])
+    // transform jsx to js
+    .pipe(react())
 
-        .pipe(testFilter)
-        .pipe(jasmine())
-        .on('error', console.warn.bind(console));
+    // copy into target
+    .pipe(gulp.dest(paths.target))
+
+    // run tests
+    .pipe(testFilter)
+    .pipe(jasmine())
+    .on('error', console.warn.bind(console));
 });
 
-gulp.task('watch', function() {
-    gulp.watch([
-        paths.src + '/main/app/**/*.js',
-        paths.src + '/test/**/*.js',
-    ], ['test', 'js']);
-});
-
-gulp.task('default', ['test', 'watch']);
+gulp.task('default', ['test']);
