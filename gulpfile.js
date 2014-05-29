@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var gulpFilter = require('gulp-filter');
 
 var react = require('gulp-react');
-var jasmine = require('gulp-jasmine');
+var mocha = require('gulp-mocha');
 
 var paths = {
   src: './src',
@@ -21,8 +21,12 @@ gulp.task('test', function() {
 
     // run tests
     .pipe(testFilter)
-    .pipe(jasmine())
+    .pipe(mocha())
     .on('error', console.warn.bind(console));
 });
 
-gulp.task('default', ['test']);
+gulp.task('watch', function() {
+  gulp.watch(paths.src + '/**/*.js', ['test']);
+});
+
+gulp.task('default', ['test', 'watch']);
