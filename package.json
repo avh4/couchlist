@@ -10,6 +10,9 @@
     "react": "~0.10.0",
     "webpack": "~1.0.0",
     "jasmine-node": "^1.14.3",
-    "webpack-dev-server": "^1.2.8"
+    "webpack-dev-server": "^1.2.8",
+    "gulp": "^3.6.2",
+    "gulp-filter": "^0.4.1",
+    "gulp-jasmine": "^0.2.0"
   }
 }
