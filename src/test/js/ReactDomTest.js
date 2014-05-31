@@ -3,8 +3,7 @@
 var jsdom = require('jsdom').jsdom;
 
 exports.reset = function() {
-  var jsdom = require('jsdom');
-  global.window = jsdom.jsdom().createWindow('<html><body></body></html>');
+  global.window = jsdom().createWindow('<html><body></body></html>');
   global.document = window.document;
   global.navigator = window.navigator;
 }
