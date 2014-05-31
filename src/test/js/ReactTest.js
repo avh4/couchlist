@@ -9,7 +9,7 @@ exports.initDOM = function() {
   global.document = window.document;
   global.navigator = window.navigator;
 
-  React = require("react/addons"),
+  React = require("react/addons");
   ReactTestUtils = React.addons.TestUtils;
 }
 
