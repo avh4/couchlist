@@ -2,12 +2,11 @@
 
 var ReactTest = require('./ReactTest');
 var expect = require('chai').expect;
-var Label;
+var Label = require("../../main/js/Label");
 
 describe("Label Test", function() {
   beforeEach(function() {
     ReactTest.initDOM();
-    Label = require("../../main/js/Label");
   });
 
   afterEach(function() {
