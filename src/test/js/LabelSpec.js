@@ -1,12 +1,12 @@
 /** @jsx React.DOM */
 
-var ReactTest = require('./ReactTest');
+var ReactTest = require('./ReactDomTest');
 var expect = require('chai').expect;
 var Label = require("../../main/js/Label");
 
 describe("Label Test", function() {
   beforeEach(function() {
-    ReactTest.resetDOM();
+    ReactTest.reset();
   });
 
   it("Check Text Assignment", function() {
