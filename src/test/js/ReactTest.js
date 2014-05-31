@@ -1,7 +1,6 @@
 "use strict";
 
 var React, ReactTestUtils;
-var assert = require("assert");
 var jsdom = require('jsdom').jsdom;
 
 exports.initDOM = function() {
