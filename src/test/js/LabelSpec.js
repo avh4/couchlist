@@ -6,11 +6,7 @@ var Label = require("../../main/js/Label");
 
 describe("Label Test", function() {
   beforeEach(function() {
-    ReactTest.initDOM();
-  });
-
-  afterEach(function() {
-    ReactTest.cleanDOM();
+    ReactTest.resetDOM();
   });
 
   it("Check Text Assignment", function() {
