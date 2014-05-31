@@ -25,6 +25,11 @@ exports.render = function(component) {
   return ReactTestUtils.renderIntoDocument(component);
 }
 
+exports.renderString = function(component) {
+  React = require("react");
+  return React.renderComponentToString(component);
+}
+
 exports.click = function(component) {
   ReactTestUtils.Simulate.click(component.getDOMNode());
 }
