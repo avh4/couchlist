@@ -19,3 +19,7 @@ exports.mock = function(subject, componentNameToMock) {
   });
   subject.__set__(componentNameToMock, mock);
 }
+
+exports.mock.props = function(element) {
+  return JSON.parse(element.text());
+}

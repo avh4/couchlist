@@ -2,18 +2,15 @@
 
 var rewire = require('rewire');
 var ReactTest = require('./ReactTest');
+var props = ReactTest.mock.props;
 var expect = require('chai').expect;
 var {{project}} = rewire('../../main/js/{{project}}');
 
 ReactTest.mock({{project}}, 'Label');
 
-function component(element) {
-  return JSON.parse(element.text());
-}
-
 describe('{{project}}', function() {
   it('shows a label', function() {
     var $ = ReactTest.render(<{{project}}/>);
-    expect(component($('#Label')).children).to.eql('{{project}}');
+    expect(props($('#Label')).children).to.eql('{{project}}');
   });
 });
