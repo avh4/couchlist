@@ -12,7 +12,7 @@ module.exports = React.createClass({
 
     render: function () {
         return (
-            <p ref="p" onClick={this.handleClick}>{this.props.children}</p>
+            <p onClick={this.handleClick}>{this.props.children}</p>
         );
     }
 });

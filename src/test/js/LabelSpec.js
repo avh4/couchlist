@@ -5,20 +5,21 @@ var expect = require('chai').expect;
 var Label = require("../../main/js/Label");
 
 describe("Label Test", function() {
-  beforeEach(function() {
-    ReactTest.reset();
+  var subject;
+
+  beforeEach(function(done) {
+    ReactTest.reset(done);
   });
 
   it("Check Text Assignment", function() {
-    var label = ReactTest.render(<Label>Some Text We Need
-      for Test</Label>);
-    expect(label.refs.p.props.children).to.equal("Some Text We Need for Test");
+    subject = ReactTest.render(<Label>Some Text We Need for Test</Label>);
+    expect($(subject).find('p').text()).to.equal("Some Text We Need for Test");
   });
 
   it("Click", function () {
     var label = ReactTest.render(<Label>Some Text We Need to Test</Label>);
 
-    ReactTest.click(label.refs.p);
-    expect(label.refs.p.props.children).to.equal("Text After Click");
+    ReactTest.click(subject, 'p');
+    expect($(subject).find('p').text()).to.equal("Text After Click");
   });
 });
