@@ -3,9 +3,10 @@
 "use strict";
 
 var React = require('react');
+var Label = require('./Label');
 
 module.exports = React.createClass({
   render: function() {
-    return <div><h1>{{ project }}</h1></div>;
+    return <div><Label>{{ project }}</Label></div>;
   }
 });

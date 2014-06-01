@@ -1,0 +1,30 @@
+/** @jsx React.DOM */
+
+var rewire = require('rewire');
+var ReactTest = require('./ReactTest');
+var expect = require('chai').expect;
+var {{project}} = rewire('../../main/js/{{project}}');
+
+var React = require('react');
+
+function stubComponent(subject, componentNameToMock) {
+  var mock = React.createClass({
+    render: function() {
+      return <div id={componentNameToMock}>{JSON.stringify(this.props)}</div>;
+    }
+  });
+  subject.__set__(componentNameToMock, mock);
+}
+
+stubComponent({{project}}, 'Label');
+
+function component(element) {
+  return JSON.parse(element.text());
+}
+
+describe('{{project}}', function() {
+  it('shows a label', function() {
+    var $ = ReactTest.render(<{{project}}/>);
+    expect(component($('#Label')).children).to.eql('{{project}}');
+  });
+});
