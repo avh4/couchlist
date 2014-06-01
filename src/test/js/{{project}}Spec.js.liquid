@@ -5,18 +5,7 @@ var ReactTest = require('./ReactTest');
 var expect = require('chai').expect;
 var {{project}} = rewire('../../main/js/{{project}}');
 
-var React = require('react');
-
-function stubComponent(subject, componentNameToMock) {
-  var mock = React.createClass({
-    render: function() {
-      return <div id={componentNameToMock}>{JSON.stringify(this.props)}</div>;
-    }
-  });
-  subject.__set__(componentNameToMock, mock);
-}
-
-stubComponent({{project}}, 'Label');
+ReactTest.mock({{project}}, 'Label');
 
 function component(element) {
   return JSON.parse(element.text());
