@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
+require('./env');
 var ReactTest = require('./ReactDomTest');
-var expect = require('chai').expect;
 var Label = require("../../main/js/Label");
 
 describe("Label Test", function() {

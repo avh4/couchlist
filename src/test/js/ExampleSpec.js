@@ -1,4 +1,4 @@
-var expect = require('chai').expect;
+require('./env');
 
 describe('Something', function() {
   it('has a test', function() {

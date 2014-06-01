@@ -1,9 +1,8 @@
 /** @jsx React.DOM */
 
-var rewire = require('rewire');
+require('./env');
 var ReactTest = require('./ReactTest');
 var props = ReactTest.mock.props;
-var expect = require('chai').expect;
 var {{project}} = rewire('../../main/js/{{project}}');
 
 ReactTest.mock({{project}}, 'Label');
