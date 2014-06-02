@@ -1,7 +1,7 @@
 /** @jsx React.DOM */
 
 require('./env');
-var ReactTest = require('./ReactTest');
+var ReactTest = require('./ReactDomTest');
 var props = ReactTest.mock.props;
 var {{project}} = rewire('../../main/js/{{project}}');
 
@@ -9,7 +9,7 @@ ReactTest.mock({{project}}, 'Label');
 
 describe('{{project}}', function() {
   it('shows a label', function() {
-    var $ = ReactTest.render(<{{project}}/>);
+    ReactTest.render(<{{project}}/>);
     expect(props($('#Label')).children).to.eql('{{project}}');
   });
 });
