@@ -2,7 +2,10 @@
 
 require('./env');
 var ReactTest = require('./ReactDomTest');
-var Label = require("../../main/js/Label");
+var Label = rewire("../../main/js/Label");
+
+var ExampleService = { click: sinon.spy() };
+Label.__set__('ExampleService', ExampleService);
 
 describe("Label Test", function() {
   var subject;
@@ -21,5 +24,6 @@ describe("Label Test", function() {
 
     ReactTest.click('p');
     expect($('p').text()).to.equal("Text After Click");
+    expect(ExampleService.click).to.have.been.called;
   });
 });
