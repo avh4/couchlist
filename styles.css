@@ -2,3 +2,5 @@ html, body {
 	margin: 0;
 	background: #eee;
 }
+
+body { padding-top: 70px; }

@@ -3,10 +3,10 @@
 "use strict";
 
 var React = require('react');
-var Label = require('./Label');
+var TheList = require('./TheList');
 
 module.exports = React.createClass({
   render: function() {
-    return <div><Label>couchlist</Label></div>;
+    return <TheList/>;
   }
 });
