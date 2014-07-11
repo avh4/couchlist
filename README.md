@@ -1,3 +1,11 @@
-To use the archetype, 
+# couchlist
 
-    bash <(curl http://archetypes.github.io/bootstrap.sh) archetypes/js-react
+
+
+## Development
+
+```
+npm install
+npm run-script dev
+open http://localhost:8080/webpack-dev-server/
+```

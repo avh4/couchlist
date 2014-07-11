@@ -7,6 +7,6 @@ var Label = require('./Label');
 
 module.exports = React.createClass({
   render: function() {
-    return <div><Label>{{ project }}</Label></div>;
+    return <div><Label>couchlist</Label></div>;
   }
 });
