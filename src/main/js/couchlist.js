@@ -7,18 +7,7 @@ var TheList = require('./TheList');
 
 var request = require('browser-request');
 
-var since = 0;
-
-function poll(callback) {
-  console.log('Polling: ' + since);
-  request('http://localhost:5984/couchlist-dev/_changes?feed=longpoll&since=' + since,
-    function(err, res, body) {
-      var b = JSON.parse(body);
-      since = b.last_seq;
-      callback();
-      setTimeout(poll.bind(null, callback));
-    });
-}
+var changes = require('./couchdb/changes')('http://localhost:5984/couchlist-dev');
 
 module.exports = React.createClass({
   getInitialState: function() {
@@ -27,7 +16,7 @@ module.exports = React.createClass({
     };
   },
   componentDidMount: function() {
-    poll(function() {
+    changes.longpoll(function() {
       request('http://localhost:5984/couchlist-dev/_all_docs?include_docs=true',
         function(err, res, body) {
           this.setState({
