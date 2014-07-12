@@ -6,6 +6,7 @@ module.exports = function(googleapis, authClient, couchlist) {
     delete doc.messages[0].payload.parts;
     doc._id = 'couchlist:gmail:thread:' + thread.id;
     doc['couchlist:description'] = subject;
+    doc['couchlist:type'] = 'gmail';
 
     console.log('gmail/import:', doc._id, subject);
     couchlist.put(doc);

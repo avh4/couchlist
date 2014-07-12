@@ -17,7 +17,11 @@ module.exports = React.createClass({
   render: function() {
     var items = this.props.items.map(function(i) {
       var doc = i.doc;
-      return <li className="list-group-item" key={doc._id}><span className="glyphicon glyphicon-star"></span>{doc['couchlist:description']}</li>;
+      var icon;
+      if (doc['couchlist:type'] === 'gmail') {
+        icon = <span className="glyphicon glyphicon-envelope"></span>;
+      }
+      return <li className="list-group-item" key={doc._id}>{icon} {doc['couchlist:description']}</li>;
     });
     return <ul className="list-group">{items}
     <li className="add list-group-item"><form onSubmit={this.doAdd}><input ref="addField" placeholder="New Item" className="form-control"/></form></li>

@@ -58,6 +58,12 @@ describe('actors/gmail', function() {
           return doc['couchlist:description'] === 'My Subject';
         }));
       });
+      
+      it('sets the item type', function() {
+        expect(couchlist.put).to.have.been.calledWith(sinon.match(function(doc) {
+          return doc['couchlist:type'] === 'gmail';
+        }));
+      });
     });
   
     describe('when there are updated threads in the inbox', function() {
