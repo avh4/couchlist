@@ -17,6 +17,7 @@ module.exports = React.createClass({
   render: function() {
     var items = this.props.items.map(function(i) {
       var doc = i.doc;
+      if (doc['couchlist:completed']) return null;
       var icon;
       if (doc['couchlist:type'] === 'gmail') {
         icon = <span className="glyphicon glyphicon-envelope"></span>;
