@@ -6,21 +6,22 @@
     "watch": "gulp"
   },
   "devDependencies": {
-    "jsx-loader": "~0.10.0",
-    "react": "~0.10.0",
-    "webpack": "~1.0.0",
-    "jasmine-node": "^1.14.3",
-    "webpack-dev-server": "^1.2.8",
+    "chai": "^1.9.1",
     "gulp": "^3.6.2",
     "gulp-filter": "^0.4.1",
-    "gulp-react": "^0.3.3",
     "gulp-mocha": "^0.4.1",
-    "chai": "^1.9.1",
-    "jsdom": "^0.10.5",
-    "rewire": "^2.0.1",
+    "gulp-react": "^0.3.3",
+    "jasmine-node": "^1.14.3",
     "jquery": "^2.1.1",
+    "jsdom": "^0.10.5",
+    "jsx-loader": "~0.10.0",
+    "mocha": "^1.20.1",
+    "react": "~0.10.0",
+    "rewire": "^2.0.1",
     "sinon": "^1.10.1",
-    "sinon-chai": "^2.5.0"
+    "sinon-chai": "^2.5.0",
+    "webpack": "~1.0.0",
+    "webpack-dev-server": "^1.2.8"
   },
   "dependencies": {
     "browser-request": "^0.3.1",
