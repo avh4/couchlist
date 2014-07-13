@@ -22,7 +22,7 @@ module.exports = React.createClass({
       if (doc['couchlist:type'] === 'gmail') {
         icon = <span className="glyphicon glyphicon-envelope"></span>;
       }
-      if (doc['couchlist:pending']) {
+      if (!doc['couchlist:description']) {
         return <li className="list-group-item" key={doc._id}><i className="text-muted">{icon} {doc._id}</i></li>;
       } else {
         return <li className="list-group-item" key={doc._id}>{icon} {doc['couchlist:description']}</li>;
