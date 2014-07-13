@@ -45,7 +45,6 @@ module.exports = function(googleapis, authClient, itemStore) {
               var subject = thread.messages[0].payload.headers.filter(function(h) { return h.name === 'Subject'} )[0].value;
               item['couchlist:completed'] = true;
               item['couchlist:description'] = subject;
-              item['couchlist:pending'] = false;
               for (var i = 0; i < thread.messages.length; i++) {
                 if (thread.messages[i].labelIds.indexOf('INBOX') != -1) {
                   item['couchlist:completed'] = false;

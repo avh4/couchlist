@@ -5,6 +5,7 @@ var items = {};
 module.exports = {
   put: function(doc) {
     items[doc._id] = doc;
+    return q();
   },
   get: function(id) {
     return q(items[id]);

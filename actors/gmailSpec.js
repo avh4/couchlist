@@ -41,7 +41,7 @@ describe('actors/gmail', function() {
   
     describe('when there are new threads in the inbox', function() {
       beforeEach(function() {
-        subject();
+        return subject();
       });
     
       it('adds the thread to the list', function() {
@@ -55,17 +55,28 @@ describe('actors/gmail', function() {
           expect(item['couchlist:type']).to.equal('gmail');
         });
       });
-      
-      it('marks the item as pending since the message data is not loaded', function() {
-        return itemStore.get('couchlist:gmail:thread:T1').then(function(item) {
-          expect(item['couchlist:pending']).to.equal(true);
-        });
-      });
     });
   
     describe('when there are updated threads in the inbox', function() {
-      it('updates the existing list items', function() {
-        
+      beforeEach(function() {
+        return itemStore.put({
+          _id: 'couchlist:gmail:thread:T1', 
+          'couchlist:description': 'My Subject',
+          'couchlist:completed': true
+        })
+        .then(subject);        
+      });
+      
+      it('does not remove the description', function() {
+        return itemStore.get('couchlist:gmail:thread:T1').then(function(item) {
+          expect(item['couchlist:description']).to.equal('My Subject');
+        });
+      });
+      
+      it('marks the item as not complete', function() {
+        return itemStore.get('couchlist:gmail:thread:T1').then(function(item) {
+          expect(item['couchlist:completed']).to.equal(false);
+        });
       });
     });
   });
@@ -104,21 +115,13 @@ describe('actors/gmail', function() {
       });
     });
     
-    it('sets pending to false', function() {
-      subject();
-      
-      check(function(item) {
-        expect(item['couchlist:pending']).to.equal(false);
-      });
-    });
-  
     describe('when a thread has been archived', function() {
       it('marks the item as complete', function() {
         m1.labelIds = []; // 'INBOX' is not present
 
         subject();
         
-        check(function(item) {
+        return check(function(item) {
           expect(item['couchlist:completed']).to.equal(true);
         });
       });
@@ -128,7 +131,7 @@ describe('actors/gmail', function() {
 
         subject();
         
-        check(function(item) {
+        return check(function(item) {
           expect(item['couchlist:completed']).to.equal(false);
         });
       });
@@ -142,7 +145,7 @@ describe('actors/gmail', function() {
 
         subject();
         
-        check(function(item) {
+        return check(function(item) {
           expect(item['couchlist:completed']).to.equal(false);
         });
       });
