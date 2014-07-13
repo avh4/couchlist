@@ -21,9 +21,9 @@ module.exports = React.createClass({
       if (doc['couchlist:completed']) return null;
       var icon;
       if (doc['couchlist:type'] === 'gmail') {
-        icon = <span className="glyphicon glyphicon-envelope"></span>;
+        icon = <i className="fa fa-envelope"></i>;
       } else if (doc['couchlist:type'] === 'github:issue') {
-        icon = "[git]";
+        icon = <i className="fa fa-github-alt"></i>;
       }
       
       var project;
