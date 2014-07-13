@@ -9,7 +9,7 @@ var net = require('./net');
 module.exports = React.createClass({
   doAdd: function() {
     var text = this.refs.addField.getDOMNode().value;
-    var doc = { 'couchlist:description': text };
+    var doc = { 'couchlist:description': text, 'couchlist:type': 'text' };
     net.post(db, doc);
     this.refs.addField.getDOMNode().value = '';
     return false;
@@ -17,6 +17,7 @@ module.exports = React.createClass({
   render: function() {
     var items = this.props.items.map(function(i) {
       var doc = i.doc;
+      if (!doc['couchlist:type']) return null;
       if (doc['couchlist:completed']) return null;
       var icon;
       if (doc['couchlist:type'] === 'gmail') {
