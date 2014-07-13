@@ -75,26 +75,25 @@ describe('actors/gmail', function() {
 
   describe('actors/gmail/update', function() {
     var subject;
+    var m1;
   
     beforeEach(function() {
-      subject = require('./gmail/update')(gmail, authClient, couchlist);
-    });
-    
-    it('sets the item description from the message subject', function(done) {
       couchlist.get.returns(q({
         'couchlist:gmail:thread:T1': {
           _id: 'couchlist:gmail:thread:T1',
           source: { id: 'T1' }
         }
       }));
-      
-      gmail.addMessage({
+      gmail.addMessage(m1 = {
         id: 'M1',
         threadId: 'T1',
         labelIds: [ 'INBOX' ],
         payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
       });
-      
+      subject = require('./gmail/update')(gmail, authClient, couchlist);
+    });
+    
+    it('sets the item description from the message subject', function(done) {
       subject();
       
       async(function() {
@@ -105,20 +104,6 @@ describe('actors/gmail', function() {
     });
     
     it('sets pending to false', function(done) {
-      couchlist.get.returns(q({
-        'couchlist:gmail:thread:T1': {
-          _id: 'couchlist:gmail:thread:T1',
-          source: { id: 'T1' }
-        }
-      }));
-      
-      gmail.addMessage({
-        id: 'M1',
-        threadId: 'T1',
-        labelIds: [ 'INBOX' ],
-        payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
-      });
-      
       subject();
       
       async(function() {
@@ -129,21 +114,8 @@ describe('actors/gmail', function() {
     });
   
     describe('when a thread has been archived', function() {
-      beforeEach(function() {
-        couchlist.get.returns(q({
-          'couchlist:gmail:thread:T1': {
-            _id: 'couchlist:gmail:thread:T1',
-            source: { id: 'T1' }
-          }
-        }));
-      });
-      
       it('marks the item as complete', function(done) {
-        gmail.addMessage({
-          threadId: 'T1',
-          labelIds: [ ], // 'INBOX' is not present
-          payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
-        });
+        m1.labelIds = []; // 'INBOX' is not present
 
         subject();
         
@@ -155,11 +127,7 @@ expect(couchlist.put).to.have.been.calledWith(sinon.match(function(doc) {
       });
       
       it('does not mark items as complete if they are still in the inbox', function(done) {
-        gmail.addMessage({
-          threadId: 'T1',
-          labelIds: [ 'OTHER', 'INBOX' ],
-          payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
-        });
+        m1.labelIds = [ 'OTHER', 'INBOX' ];
 
         subject();
         
@@ -171,11 +139,7 @@ expect(couchlist.put).to.have.been.calledWith(sinon.match(function(doc) {
       });
       
       it('does not mark items as complete if any message is still in the inbox', function(done) {
-        gmail.addMessage({
-          threadId: 'T1',
-          labelIds: [ ],
-          payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
-        });
+        m1.labelIds = []; // 'INBOX' is not present
         gmail.addMessage({
           threadId: 'T1',
           labelIds: [ 'OTHER', 'INBOX' ]
