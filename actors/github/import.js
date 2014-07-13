@@ -16,10 +16,10 @@ module.exports = function(itemStore) {
     itemStore.put(doc);
     return q();
   }
-
-  return function() {
+  
+  function go(filter) {
     var p = q.defer();
-    request.get('https://api.github.com/issues')
+    request.get('https://api.github.com/issues?filter=' + filter)
     .set('Accept', 'application/json')
     .set('Authorization', 'token ff200399f532bfa720a7527aa865364987f3b040')
     .end(function(err, res) {
@@ -30,5 +30,9 @@ module.exports = function(itemStore) {
       p.resolve(q.all(promises));
     });
     return p.promise;
+  }
+
+  return function() {
+    return q.all(go('assigned'), go('created'));
   };
 };
