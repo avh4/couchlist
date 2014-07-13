@@ -22,11 +22,19 @@ module.exports = React.createClass({
       var icon;
       if (doc['couchlist:type'] === 'gmail') {
         icon = <span className="glyphicon glyphicon-envelope"></span>;
+      } else if (doc['couchlist:type'] === 'github:issue') {
+        icon = "[git]";
       }
+      
+      var project;
+      if (doc['couchlist:project']) {
+        project = <span className="text-muted">{doc['couchlist:project']}</span>;
+      }
+      
       if (!doc['couchlist:description']) {
         return <li className="list-group-item" key={doc._id}><i className="text-muted">{icon} {doc._id}</i></li>;
       } else {
-        return <li className="list-group-item" key={doc._id}>{icon} {doc['couchlist:description']}</li>;
+        return <li className="list-group-item" key={doc._id}>{icon} {project} {doc['couchlist:description']}</li>;
       }
     });
     return <ul className="list-group">{items}
