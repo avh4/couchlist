@@ -6,8 +6,9 @@ var gmail = require('./gmail/index');
 
 module.exports = { 
   start: function() {
-    var g = gmail(couchlist);
-    g.import();
-    g.update();
+    gmail(couchlist).then(function(g) {
+      g.import();
+      g.update();
+    });
   } 
 };
