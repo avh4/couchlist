@@ -35,21 +35,24 @@ module.exports = function(googleapis, authClient, couchlist) {
       couchlist.get().then(function(items) {
         objFor(items, function(itemId, item) {
           if (item['couchlist:completed']) return;
-          var threadId = item.id;
-          client.gmail.users.threads.get({userId: 'me', id: threadId, fields: 'messages(labelIds)'})
+          if (!item.source) return;
+          var threadId = item.source.id;
+          client.gmail.users.threads.get({userId: 'me', id: threadId, fields: 'messages(labelIds,payload)'})
           .withAuthClient(authClient).execute(function(err, thread) {
             if (err) {
               log.err(threadId, err.code, err.message);
             } else {
+              var subject = thread.messages[0].payload.headers.filter(function(h) { return h.name === 'Subject'} )[0].value;
+              item['couchlist:completed'] = true;
+              item['couchlist:description'] = subject;
+              item['couchlist:pending'] = false;
               for (var i = 0; i < thread.messages.length; i++) {
                 if (thread.messages[i].labelIds.indexOf('INBOX') != -1) {
-                  log.debug(threadId, 'SKIP');
-                  return;
+                  item['couchlist:completed'] = false;
                 }
               }
             
               log.info(threadId, 'COMPLETED');
-              item['couchlist:completed'] = true;
               couchlist.put(item);
             }
           });

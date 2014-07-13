@@ -22,7 +22,11 @@ module.exports = React.createClass({
       if (doc['couchlist:type'] === 'gmail') {
         icon = <span className="glyphicon glyphicon-envelope"></span>;
       }
-      return <li className="list-group-item" key={doc._id}>{icon} {doc['couchlist:description']}</li>;
+      if (doc['couchlist:pending']) {
+        return <li className="list-group-item" key={doc._id}><i className="text-muted">{icon} {doc._id}</i></li>;
+      } else {
+        return <li className="list-group-item" key={doc._id}>{icon} {doc['couchlist:description']}</li>;
+      }
     });
     return <ul className="list-group">{items}
     <li className="add list-group-item"><form onSubmit={this.doAdd}><input ref="addField" placeholder="New Item" className="form-control"/></form></li>
