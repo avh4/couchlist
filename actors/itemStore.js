@@ -3,7 +3,7 @@ var q = require('q');
 module.exports = function(net, db) {
   return {
     put: function(doc) {
-      if (!doc._id) throw new Error('doc._id is required for couchlist.put()');
+      if (!doc._id) throw new Error('doc._id is required for itemStore.put()');
       var doc_url = db + '/' + doc._id;
       net.put(doc_url, doc).then(function(res) {
         if (res.status === 409) {
@@ -16,7 +16,12 @@ module.exports = function(net, db) {
         return res;
       }).done();
     },
-    get: function() {
+    get: function(id) {
+      return net.get(db + '/' + id).then(function(res) {
+        return res.body;
+      });
+    },
+    getAll: function() {
       return net.get(db + '/_all_docs?include_docs=true').then(function(res) {
         return res.body.rows.map(function(r) {
           return r.doc;

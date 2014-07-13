@@ -1,10 +1,10 @@
 var googleapis = require('googleapis');
 
-module.exports = function(couchlist) {
+module.exports = function(itemStore) {
   return require('./authClient')().then(function(authClient) {
     return   {
-      import: require('./import')(googleapis, authClient, couchlist),
-      update: require('./update')(googleapis, authClient, couchlist)
+      import: require('./import')(googleapis, authClient, itemStore),
+      update: require('./update')(googleapis, authClient, itemStore)
     };
   });
 };

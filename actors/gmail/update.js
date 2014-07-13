@@ -12,7 +12,7 @@ var log = {
   }
 }
 
-module.exports = function(googleapis, authClient, couchlist) {
+module.exports = function(googleapis, authClient, itemStore) {
   function getClient() {
     var p = q.defer();
     googleapis.discover('gmail', 'v1')
@@ -32,7 +32,7 @@ module.exports = function(googleapis, authClient, couchlist) {
   
   return function() {
     getClient().then(function(client) {
-      couchlist.get().then(function(items) {
+      itemStore.getAll().then(function(items) {
         objFor(items, function(itemId, item) {
           if (item['couchlist:completed']) return;
           if (!item.source) return;
@@ -53,7 +53,7 @@ module.exports = function(googleapis, authClient, couchlist) {
               }
             
               log.info(threadId, 'COMPLETED');
-              couchlist.put(item);
+              itemStore.put(item);
             }
           });
         });

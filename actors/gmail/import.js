@@ -1,4 +1,4 @@
-module.exports = function(googleapis, authClient, couchlist) {
+module.exports = function(googleapis, authClient, itemStore) {
   function insertThread(thread) {
     var doc = {
       _id: 'couchlist:gmail:thread:' + thread.id,
@@ -8,7 +8,7 @@ module.exports = function(googleapis, authClient, couchlist) {
     };
 
     console.log('gmail/import:', doc._id);
-    couchlist.put(doc);
+    itemStore.put(doc);
   }
   
   return function() {

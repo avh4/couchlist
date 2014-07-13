@@ -19,7 +19,7 @@ function async(fn, done) {
   setTimeout(a(fn, done));
 }
 
-describe('couchlist', function() {
+describe('itemStore', function() {
   var subject;
   var net;
   var db;
@@ -32,7 +32,7 @@ describe('couchlist', function() {
       put: sinon.stub().returns(q({})),
       head: sinon.stub()
     };
-    subject = require('./couchlist')(net, db);
+    subject = require('./itemStore')(net, db);
   });
   
   describe('put', function() {
@@ -61,11 +61,11 @@ describe('couchlist', function() {
     });
   });
 
-  describe('get', function() {
+  describe('getAll', function() {
     it('returns a promize with the _all_docs result', function(done) {
       net.get.returns(q({body: {total_rows: 1, offest: 0, rows: [ { id: 'D1', key: 'D1', value: { rev: 'r1'}, doc: { id: 'T1' }}]}}));
       
-      subject.get().then(a(function (items) {
+      subject.getAll().then(a(function (items) {
         expect(net.get).to.have.been.calledWith(db + '/_all_docs?include_docs=true');
         expect(items).to.eql([{ id: 'T1' }]);
       }, done));
