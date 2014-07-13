@@ -1,20 +1,6 @@
-var sinon = require('sinon');
-var chai = require('chai');
-chai.use(require('sinon-chai'));
-var expect = chai.expect;
+require('./env');
+
 var q = require('q');
-
-
-function async(fn, done) {
-  setTimeout(function() {
-    try {
-      fn();
-      done();
-    } catch (e) {
-      done(e);
-    }
-  })
-}
 
 describe('actors/gmail', function() {
   var gmail;
@@ -36,7 +22,7 @@ describe('actors/gmail', function() {
         payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
       });
       
-      subject = require('./gmail/import')(gmail, authClient, itemStore);
+      subject = require('../gmail/import')(gmail, authClient, itemStore);
     });
   
     describe('when there are new threads in the inbox', function() {
@@ -96,7 +82,7 @@ describe('actors/gmail', function() {
         labelIds: [ 'INBOX' ],
         payload: { headers: [ { name: 'Subject', value: 'My Subject'}]}
       });
-      subject = require('./gmail/update')(gmail, authClient, itemStore);
+      subject = require('../gmail/update')(gmail, authClient, itemStore);
     });
     
     function check(fn) {

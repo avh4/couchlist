@@ -1,7 +1,5 @@
-var sinon = require('sinon');
-var chai = require('chai');
-chai.use(require('sinon-chai'));
-var expect = chai.expect;
+require('./env');
+
 var q = require('q');
 
 function a(fn, done) {
@@ -32,7 +30,7 @@ describe('itemStore', function() {
       put: sinon.stub().returns(q({})),
       head: sinon.stub()
     };
-    subject = require('./itemStore')(net, db);
+    subject = require('../itemStore')(net, db);
   });
   
   describe('put', function() {

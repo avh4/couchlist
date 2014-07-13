@@ -2,7 +2,7 @@
   "scripts": {
     "build": "mkdir -p target && ./node_modules/.bin/webpack src/main/js/main.js target/bundle.js && cp src/main/{css,html}/* target/",
     "dev": "webpack-dev-server",
-    "test": "gulp test",
+    "test": "gulp test && mocha actors/test",
     "watch": "gulp"
   },
   "devDependencies": {
